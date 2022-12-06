@@ -1,0 +1,53 @@
+---
+//https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
+import type { HTMLAttributes } from "astro/types";
+import { createDatasetFromAstroProps, generateRandomUUID } from './utils'
+
+interface Props extends HTMLAttributes<"input"> {
+  label?: string;
+}
+
+const { label, type, name, placeholder = " " , ...rest } = Astro.props;
+const uuid =  generateRandomUUID();
+const dataset = createDatasetFromAstroProps<Props>(Astro.props)
+
+
+
+---
+
+<form-element data-uuid={uuid} {...dataset} >  
+  <label for={name}>{label}</label>
+  <input name={name} type={type} placeholder={placeholder}  />
+</form-element>
+
+
+<script >
+
+class FormElement extends HTMLElement {
+    constructor() {
+      super();
+      this.input = this.querySelector('input');
+      this.input.addEventListener('input', (event: InputEvent) => {
+        this._onChange(event)
+      })
+       
+    }
+
+    private input: HTMLInputElement;
+    private _value: string;
+    private _lastInsert: string;
+
+    private _onChange(event: InputEvent) {
+      this._lastInsert = event.data;
+      this._value = this.input.value;
+    }
+
+    value() {
+      return this._value
+    }
+
+  }
+
+  customElements.define('form-element', FormElement);
+  
+</script>

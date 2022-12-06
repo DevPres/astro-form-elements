@@ -1,0 +1,24 @@
+---
+import { BaseInput } from "astro-form-elements";
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <BaseInput label="test" name="test" placeholder="placeholder"/>
+    <BaseInput label="test2" name="test2"/>
+    <BaseInput label="test2" name="test2"/>
+  </body>
+
+  <script>
+    let x = document.querySelectorAll('form-element');
+    console.log(x)
+  </script>
+</html>
