@@ -12,13 +12,21 @@ import { BaseInput } from "astro-form-elements";
     <title>Astro</title>
   </head>
   <body>
-    <BaseInput label="test" name="test" placeholder="placeholder"/>
+    <BaseInput formElementName="test" label="test" name="test" placeholder="placeholder"/>
     <BaseInput label="test2" name="test2"/>
     <BaseInput label="test2" name="test2"/>
+
+    <button>test</button>
   </body>
 
-  <script>
+  <script> 
+    import { FormElement } from 'astro-form-elements'
+
+    const test = new FormElement('test');
+  
+    // test.onChanges().then()
     let x = document.querySelectorAll('form-element');
     console.log(x)
+    document.querySelector('button')?.addEventListener('click', () => console.log(x));
   </script>
 </html>
