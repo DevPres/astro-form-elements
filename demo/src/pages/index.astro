@@ -13,8 +13,8 @@ import { BaseInput } from "astro-form-elements";
   </head>
   <body>
     <BaseInput formElementName="test" label="test" name="test" placeholder="placeholder"/>
-    <BaseInput label="test2" name="test2"/>
-    <BaseInput label="test2" name="test2"/>
+    <BaseInput formElementName="test2"label="test2" name="test2"/>
+    <BaseInput label="test3" name="test3"/>
 
     <button>test</button>
   </body>
@@ -23,6 +23,11 @@ import { BaseInput } from "astro-form-elements";
     import { FormElement } from 'astro-form-elements'
 
     const test = new FormElement('test');
+    console.log(test)
+    const test2 = new FormElement('test2');
+    console.log(test2)
+    const test3 = new FormElement('test3');
+    console.log(test3)
   
     // test.onChanges().then()
     let x = document.querySelectorAll('form-element');

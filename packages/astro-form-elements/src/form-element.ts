@@ -1,10 +1,12 @@
-export default class FormElement {
+export default class FormElement extends HTMLElement {
   constructor(formElementName: string) {
+    super();
     let ref = document.querySelector(
       `input[data-formElementName="${formElementName}"]`
     ) as HTMLInputElement;
     if (!!ref) {
       this.element = ref;
+      this._value = ref.value;
       this.element.addEventListener("input", (event: Event) => {
         return this._onChange(event);
       });
