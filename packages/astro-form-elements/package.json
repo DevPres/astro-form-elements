@@ -9,5 +9,9 @@
     "./src/index.js",
     "./src/BaseInput.astro"
   ],
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "rxjs": "^7.6.0",
+    "astro": "^1.6.12"
+  }
 }
