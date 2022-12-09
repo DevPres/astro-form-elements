@@ -16,8 +16,8 @@ const dataset = createDatasetFromAstroProps<Props>(Astro.props)
 
 ---
 
-<form-element data-uuid={uuid} {...dataset} > 
+<!-- <form-element data-uuid={uuid} {...dataset} >  -->
   <label for={name}>{label}</label>
-  <input data-formElementName={formElementName} name={name} type={type} placeholder={placeholder}  />
-</form-element>
+  <input {...dataset} name={name} type={type} placeholder={placeholder}  />
+<!-- </form-element> -->
 
