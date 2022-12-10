@@ -1,8 +1,15 @@
 import { ReplaySubject } from "rxjs";
 
 export type ElementChangesEventType = "focus" | "blur" | "input";
-export class ElementChangesEvent extends ReplaySubject<ElementChangesEvent> {
+
+export interface ElementChangesValue {
   type: ElementChangesEventType;
-  value: any;
-  lastValueInsert: any;
+  element: {
+    name: string;
+  };
+  data: {
+    value: any;
+    lastValueInsert: any;
+  };
 }
+export class ElementChangesEvent extends ReplaySubject<ElementChangesValue> {}
