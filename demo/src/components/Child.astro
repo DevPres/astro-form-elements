@@ -1,0 +1,20 @@
+---
+import { BaseInput } from "astro-form-elements";
+---
+
+<BaseInput formElementName="test" label="test" name="test" placeholder="placeholder"/>
+
+<script>
+  import { FormElement } from 'astro-form-elements'
+  import { tap } from  'rxjs'
+
+    const test = new FormElement('test');
+    test.valueChanges().pipe(
+      tap((x: any) => {
+       //console.log(x)
+      })
+    ).subscribe((x: any) => {
+      console.log(x)
+      
+    })
+</script>
