@@ -5,16 +5,46 @@ import {
   ElementChangesEventType,
   ElementChangesValue,
 } from "./element-changes";
+import { formService } from "./form-service";
 
 export interface ElementOptions {
   elementName: string;
 }
 
-export default class FormElement {
-  constructor(formElementName: string) {
-    let ref = document.querySelector(
-      `[data-formElementName="${formElementName}"]`
-    );
+export default class FormElement extends HTMLElement {
+  static get observedAttributes() {
+    return ["formElementName"];
+  }
+  constructor() {
+    super();
+
+    if (!this.hasAttribute("formElementName")) {
+      throw Error(
+        `formControlName is required!
+        at:
+        ${this.outerHTML}
+        `
+      );
+    }
+  }
+
+  connectedCallback(): void {
+    console.log(this);
+    formService.registerElement(this);
+    console.log(formService);
+  }
+
+  attributeChangedCallback(): void {}
+}
+
+customElements.define("form-element", FormElement);
+
+/* 
+
+constructor(formElementName: string) {
+    super();
+    console.log(this, formElementName);
+    let ref = this.querySelector(`[data-formElementName="${formElementName}"]`);
 
     try {
       this._registerElement(ref, {
@@ -113,5 +143,4 @@ export default class FormElement {
 
   valueChanges(): Observable<ElementChangesValue> {
     return this._elementChanges$.asObservable();
-  }
-}
+  }*/
