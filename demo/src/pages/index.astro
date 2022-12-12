@@ -1,6 +1,7 @@
 ---
 import { BaseInput } from "astro-form-elements";
-
+import  Child from "../components/Child.astro"
+ 
 ---
 
 <html lang="en">
@@ -16,6 +17,7 @@ import { BaseInput } from "astro-form-elements";
     </BaseInput>
     <BaseInput formElementName="test2"label="test2" name="test2"/>
     <BaseInput formElementName="test2"  label="test3" name="test3"/>
+    <Child/>
 
     <button>test</button>
   </body>
