@@ -1,11 +1,12 @@
 ---
 import { BaseInput } from "astro-form-elements";
 ---
-
-<BaseInput formElementName="test" label="test" name="test" placeholder="placeholder"/>
+<form-element>
+  <BaseInput formElementName="test" label="test" name="test" placeholder="placeholder"/>
+</form-element>
 
 <script>
-  import { FormElement } from 'astro-form-elements'
+  /* import { FormElement } from 'astro-form-elements'
   import { tap } from  'rxjs'
 
     const test = new FormElement('test');
@@ -16,5 +17,5 @@ import { BaseInput } from "astro-form-elements";
     ).subscribe((x: any) => {
       console.log(x)
       
-    })
+    }) */
 </script>
