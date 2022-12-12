@@ -1,6 +1,6 @@
 {
   "name": "astro-form-elements",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Element for composing form in Astro!",
   "type": "module",
   "main": "./src/index.js",

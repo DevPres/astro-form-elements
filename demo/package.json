@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "rxjs": "^7.6.0",
     "astro": "^1.6.12",
     "astro-form-elements": "file:../packages/astro-form-elements"
   }
