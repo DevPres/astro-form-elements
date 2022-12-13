@@ -13,11 +13,11 @@ import  Child from "../components/Child.astro"
     <title>Astro</title>
   </head>
   <body>
-    <form-element formElementName="test">
+    <form-element formElementName="test" id='idtest'>
       <BaseInput  label="test" name="test" placeholder="placeholder">
       </BaseInput>
     </form-element>
-    <form-element>
+    <form-element formElementId='test2'>
       <BaseInput formElementName="test2"label="test2" name="test2"/>
     </form-element>
     <BaseInput formElementName="test2"  label="test3" name="test3"/>
@@ -26,9 +26,12 @@ import  Child from "../components/Child.astro"
     <button>test</button>
   </body>
 
-  <script> 
+  <script>
     import { FormElement } from 'astro-form-elements'
     import { tap } from  'rxjs'
+    import { formService } from 'astro-form-elements'
+
+    console.log(formService.get('test'))
     /* const test = new FormElement('test');
      */
     /* test.valueChanges().pipe(
