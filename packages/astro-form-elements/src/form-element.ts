@@ -5,32 +5,67 @@ import {
   ElementChangesEventType,
   ElementChangesValue,
 } from "./element-changes";
-import { formService } from "./form-service";
+import formService from "./form-service";
 
 export interface ElementOptions {
   elementName: string;
 }
 
 export default class FormElement extends HTMLElement {
-  static get observedAttributes() {
-    return ["formElementName"];
-  }
   constructor() {
     super();
+    //TODO Gestire errore:
+    //TODO 1- stampare html del next e previous sibilings.
+    //TODO 2- parsare indentazione dell'html
+    const formElementName = this.hasAttribute("formElementName");
+    const formElementId = this.hasAttribute("formElementId");
 
-    if (!this.hasAttribute("formElementName")) {
+    if (!formElementName && !formElementId) {
       throw Error(
-        `formControlName is required!
+        `formElementName or a formElementId id is required!
         at:
         ${this.outerHTML}
         `
       );
     }
-  }
+    if (formElementName && formElementId) {
+      throw Error(
+        `component cannot have both the 'formElementName' and 'formElementId' attributes. Please remove one of these directives and try again!
+        at:
+        ${this.outerHTML}
+        `
+      );
+    }
 
+    console.log(this);
+    try {
+      formService.registerElement(this);
+    } catch (error) {
+      throw Error(
+        `Element with name or id
+        at:
+        ${this.outerHTML}
+        `
+      );
+    }
+    console.log(formService);
+  }
+  name: string;
+  /**
+   * callback called bt broswer when the element enter in page
+   */
   connectedCallback(): void {
     console.log(this);
-    formService.registerElement(this);
+    try {
+      formService.registerElement(this);
+    } catch (error) {
+      throw Error(
+        `Element with name or id 
+        at:
+        ${this.outerHTML}
+        `
+      );
+    }
     console.log(formService);
   }
 
