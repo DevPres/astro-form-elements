@@ -17,10 +17,7 @@ export default class FormElement extends HTMLElement {
     //TODO Gestire errore:
     //TODO 1- stampare html del next e previous sibilings.
     //TODO 2- parsare indentazione dell'html
-    const formElementName = this.hasAttribute("formElementName");
-    const formElementId = this.hasAttribute("formElementId");
-
-    if (!formElementName && !formElementId) {
+    if (!this.hasAttribute(this._formElementDirective)) {
       throw Error(
         `formElementName or a formElementId id is required!
         at:
@@ -28,48 +25,115 @@ export default class FormElement extends HTMLElement {
         `
       );
     }
-    if (formElementName && formElementId) {
-      throw Error(
-        `component cannot have both the 'formElementName' and 'formElementId' attributes. Please remove one of these directives and try again!
-        at:
-        ${this.outerHTML}
-        `
-      );
-    }
 
-    console.log(this);
+    this.name = this.getAttribute(this._formElementDirective)!;
+
     try {
       formService.registerElement(this);
     } catch (error) {
       throw Error(
-        `Element with name or id
+        `Element with name ${this.name} already exist
         at:
         ${this.outerHTML}
         `
       );
     }
-    console.log(formService);
+    this.attachShadow({ mode: "open" });
   }
+  /**
+   * Attribute to register a FormElement
+   */
+  private _formElementDirective = "formElementName";
+  private _element: any;
+  private _lastValueInsert: string;
+  private _lastEvent: ElementChangesEventType;
+  private _data: any;
+  private _touched = false;
+  private _elementChanges$ = new ElementChangesEvent();
+  value: any;
   name: string;
   /**
    * callback called bt broswer when the element enter in page
    */
   connectedCallback(): void {
-    console.log(this);
-    try {
-      formService.registerElement(this);
-    } catch (error) {
+    //TODO WIP: lavorare sulla possibilita di caricare input da fuori
+    const isCustom = false;
+    let html;
+    if (isCustom) {
+      //...TBD
+    } else {
+      html = `
+      <label for=${this.name}>label</label>
+      <input name=${this.name} type="text" placeholder="placeholder"  />
+      `;
+    }
+
+    let shadowRoot = this.shadowRoot!;
+    shadowRoot.innerHTML = html;
+    this._element = shadowRoot.querySelector(`[name=${this.name}]`);
+
+    if (!this._element) {
+      if (isCustom) {
+        //TODO se si sta usando un html custom, colui che emette l'evento deve esser syncato TBD
+        throw Error("TBD");
+      }
       throw Error(
-        `Element with name or id 
-        at:
-        ${this.outerHTML}
-        `
+        "An input with name ${this.name} was not found in shadowRoot of FormElement"
       );
     }
-    console.log(formService);
+
+    this._element.addEventListener("input", this._onChange.bind(this));
+    this._element.addEventListener("focus", this._onFocus.bind(this));
+    this._element.addEventListener("blur", this._onBlur.bind(this));
+
+    console.log("connectedCallback", formService);
   }
 
   attributeChangedCallback(): void {}
+
+  valueChanges(): Observable<ElementChangesValue> {
+    return this._elementChanges$.asObservable();
+  }
+
+  private _elementChanges() {
+    this._elementChanges$.next({
+      type: this._lastEvent,
+      element: {
+        name: this.name,
+      },
+      data: {
+        value: this.value,
+        lastValueInsert: this._lastValueInsert,
+      },
+    });
+  }
+
+  private _onChange(event: InputEvent): void {
+    console.log(event);
+    const target = event.target as HTMLInputElement;
+    this._lastValueInsert = event.data as string;
+    this.value = target.value;
+    this._lastEvent = event.type as ElementChangesEventType;
+    this._elementChanges();
+  }
+
+  private _onFocus(event: InputEvent): void {
+    this._lastEvent = event.type as ElementChangesEventType;
+
+    if (!this._touched) {
+      this._touched = true;
+      this._elementChanges();
+    }
+  }
+
+  private _onBlur(event: InputEvent): void {
+    this._lastEvent = event.type as ElementChangesEventType;
+
+    if (!this._touched) {
+      this._touched = true;
+      this._elementChanges();
+    }
+  }
 }
 
 customElements.define("form-element", FormElement);
