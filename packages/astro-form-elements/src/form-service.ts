@@ -11,6 +11,9 @@ class FormService {
     let key = this.getElementKey(element);
     let exist = this.checkIfElementAlreadyExist(key);
 
+    if (exist) {
+      throw new Error();
+    }
     this.#elementRegistry.set(key, element);
   }
 
@@ -27,7 +30,7 @@ class FormService {
     return elementIdData!.value;
   }
 
-  private checkIfElementAlreadyExist(key: string) {
+  private checkIfElementAlreadyExist(key: string): boolean {
     return !!this.get(key);
   }
 
