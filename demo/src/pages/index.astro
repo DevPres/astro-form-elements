@@ -14,9 +14,9 @@ import  Child from "../components/Child.astro"
   </head>
   <body>
     <form-element formElementName="test" id='idtest'></form-element>
-    <form-element formElementName='test2'></form-element>
+   <!--  <form-element formElementName='test2'></form-element>
     <form-element formElementName="test2" ></form-element>
-    <Child/>
+    <Child/> -->
 
     <button>test</button>
   </body>
@@ -27,7 +27,7 @@ import  Child from "../components/Child.astro"
     import { formService } from 'astro-form-elements'
 
     const test = formService.get('test');
-    debugger;
+    
 
     test.valueChanges().subscribe((x:any) => {
       console.log(x)

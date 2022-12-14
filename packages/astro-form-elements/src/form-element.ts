@@ -11,25 +11,40 @@ export interface ElementOptions {
   elementName: string;
 }
 
+export type ElementType = "text";
+
 export default class FormElement extends HTMLElement {
   constructor() {
     super();
     //TODO Gestire errore:
     //TODO 1- stampare html del next e previous sibilings.
     //TODO 2- parsare indentazione dell'html
-    if (!this.hasAttribute(this._formElementDirective)) {
+    const nameDirective = this.getAttribute(this._formElementDirective);
+    if (!nameDirective) {
       throw Error(
-        `formElementName or a formElementId id is required!
+        `formElementName  id is required!
         at:
         ${this.outerHTML}
         `
       );
     }
 
-    this.name = this.getAttribute(this._formElementDirective)!;
+    this.name = nameDirective;
+
+    let typeDirective = this.getAttribute(this._formElementTypeDirective);
+    if (!typeDirective) {
+      typeDirective = "text";
+    }
+    let type;
+    try {
+      type = formService.getAsElementType(typeDirective);
+    } catch (error) {
+      throw new Error(error);
+    }
+    this.type = type;
 
     try {
-      formService.registerElement(this);
+      formService.registerElement(this, this.name);
     } catch (error) {
       throw Error(
         `Element with name ${this.name} already exist
@@ -44,28 +59,34 @@ export default class FormElement extends HTMLElement {
    * Attribute to register a FormElement
    */
   private _formElementDirective = "formElementName";
+  private _formElementTypeDirective = "type";
   private _element: any;
   private _lastValueInsert: string;
   private _lastEvent: ElementChangesEventType;
   private _data: any;
   private _touched = false;
   private _elementChanges$ = new ElementChangesEvent();
+  type: ElementType;
   value: any;
   name: string;
   /**
    * callback called bt broswer when the element enter in page
    */
-  connectedCallback(): void {
+  async connectedCallback(): Promise<void> {
     //TODO WIP: lavorare sulla possibilita di caricare input da fuori
     const isCustom = false;
     let html;
     if (isCustom) {
       //...TBD
     } else {
-      html = `
-      <label for=${this.name}>label</label>
-      <input name=${this.name} type="text" placeholder="placeholder"  />
-      `;
+      /* html = await this.getModelByType(this.type); */
+      fetch(`./model/text.html`).then((x) => {
+        console.log(x);
+      });
+      html = "";
+      console.log(html);
+      html = this.replaceAttrs(html);
+      console.log(html);
     }
 
     let shadowRoot = this.shadowRoot!;
@@ -78,7 +99,7 @@ export default class FormElement extends HTMLElement {
         throw Error("TBD");
       }
       throw Error(
-        "An input with name ${this.name} was not found in shadowRoot of FormElement"
+        `An input with name ${this.name} was not found in shadowRoot of FormElement`
       );
     }
 
@@ -133,6 +154,20 @@ export default class FormElement extends HTMLElement {
       this._touched = true;
       this._elementChanges();
     }
+  }
+
+  private getModelByType(type: ElementType): Promise<string> {
+    console.log(type);
+    fetch(`./model/text.html`).then((x) => {
+      console.log(x.body);
+      return x;
+    });
+    return "";
+  }
+
+  private replaceAttrs(html: string): string {
+    console.log(html);
+    return html.replace(/{-name-}/g, this.name);
   }
 }
 

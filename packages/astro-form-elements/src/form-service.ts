@@ -1,4 +1,4 @@
-import FormElement from "./form-element";
+import FormElement, { ElementType } from "./form-element";
 
 class FormService {
   constructor() {
@@ -6,32 +6,14 @@ class FormService {
   }
 
   #elementRegistry = new Map<string, FormElement>();
+  #elementTypeRegistry: Set<ElementType> = new Set(["text"]);
 
-  registerElement(element: FormElement) {
-    let key = this.getElementKey(element);
-    let exist = this.checkIfElementAlreadyExist(key);
-
+  registerElement(element: FormElement, key: string) {
+    let exist = this.#elementRegistry.has(key);
     if (exist) {
-      throw new Error();
+      throw new Error("Element already present in the registry");
     }
     this.#elementRegistry.set(key, element);
-  }
-
-  private getElementKey(element: FormElement): string {
-    let elementNameData = element.attributes.getNamedItem("formElementName");
-    let elementIdData = element.attributes.getNamedItem("formElementId");
-    if (!!elementNameData) {
-      return elementNameData.value;
-    }
-    /**
-     * At least one of the attributes is defined, because the constructor of
-     * FormElement throw Error instad
-     */
-    return elementIdData!.value;
-  }
-
-  private checkIfElementAlreadyExist(key: string): boolean {
-    return !!this.get(key);
   }
 
   /**
@@ -45,6 +27,13 @@ class FormService {
       return element;
     }
     return;
+  }
+
+  getAsElementType(type: any): ElementType | Error {
+    if (this.#elementTypeRegistry.has(type)) {
+      return type as ElementType;
+    }
+    throw Error(`The type ${type} is not present in the registry.`);
   }
 }
 
