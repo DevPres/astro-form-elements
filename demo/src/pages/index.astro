@@ -1,5 +1,5 @@
 ---
-import { BaseInput } from "astro-form-elements";
+import { BaseInput, BaseCheckbox } from "astro-form-elements";
 import  Child from "../components/Child.astro"
  
 ---
@@ -13,7 +13,9 @@ import  Child from "../components/Child.astro"
     <title>Astro</title>
   </head>
   <body>
-    <BaseInput formElementName="test"/>
+    <BaseInput formElementName="test" label="test" type="mizzica" ciao="ciccia"/>
+    <BaseCheckbox formElementName="test2" label="test" label="this is a checkbox"/>
+    <div id="id"></div>
     <!-- <form-element formElementName="test" id='idtest'></form-element> -->
    <!--  <form-element formElementName='test2'></form-element>
     <form-element formElementName="test2" ></form-element>
@@ -23,15 +25,15 @@ import  Child from "../components/Child.astro"
   </body>
 
   <script>
-    import { FormElement } from 'astro-form-elements'
     import { tap } from  'rxjs'
     import { formService } from 'astro-form-elements'
 
     const test = formService.get('test');
-    
+   
 
     test.valueChanges().subscribe((x:any) => {
       console.log(x)
+      console.dir(test)
     })
     /* const test = new FormElement('test');
      */
