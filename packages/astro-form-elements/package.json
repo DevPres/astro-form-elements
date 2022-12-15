@@ -8,6 +8,7 @@
   "files": [
     "./src/index.js",
     "./src/BaseInput.astro",
+    "./src/BaseCheckbox.astro",
     "./src/utils.ts",
     "./src/form-element.ts",
     "./src/form-service.ts"

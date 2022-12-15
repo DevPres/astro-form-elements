@@ -1,0 +1,22 @@
+---
+//https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
+import type { HTMLAttributes } from "astro/types";
+import { createDatasetFromAstroProps, generateRandomUUID } from './utils'
+
+interface Props extends HTMLAttributes<"input"> {
+  label?: string;
+  formElementName: string;
+}
+
+const { formElementName,label, name, value, type = "text", placeholder = " " , ...rest } = Astro.props;
+const dataset = createDatasetFromAstroProps<Props>(Astro.props);
+
+
+
+---
+  <form-element formElementName={formElementName} emitOn='change'>
+    { !!label ? <label for={formElementName}>{label}</label> : ''}
+    <input data-elementInput  name={formElementName} type="checkbox"   />
+  </form-element>
+
+  
