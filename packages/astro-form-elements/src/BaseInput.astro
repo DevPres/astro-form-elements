@@ -9,13 +9,13 @@ interface Props extends HTMLAttributes<"input"> {
 }
 
 const { formElementName,label, name, type = "text", placeholder = " " , ...rest } = Astro.props;
-const uuid =  generateRandomUUID();
 const dataset = createDatasetFromAstroProps<Props>(Astro.props)
 
 
 
 ---
-
-  <label for={name}>{label}</label>
-  <input {...dataset} name={name} type={type} placeholder={placeholder}  />
+  <form-element formElementName={formElementName}>
+    { !!label ? <label for={formElementName}>{label}</label> : ''}
+    <input  name={formElementName} type={type} placeholder={placeholder}  />
+  </form-element>
 
