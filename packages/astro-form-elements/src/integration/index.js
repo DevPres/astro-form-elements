@@ -1,4 +1,4 @@
-export default function astroFormElements() {
+/* export default function astroFormElements() {
   return {
     name: "astro-form-elements",
     hooks: {
@@ -8,4 +8,4 @@ export default function astroFormElements() {
       },
     },
   };
-}
+} */

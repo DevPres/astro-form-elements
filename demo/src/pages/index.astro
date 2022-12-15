@@ -19,43 +19,21 @@ import  Child from "../components/Child.astro"
     <!-- <form-element formElementName="test" id='idtest'></form-element> -->
    <!--  <form-element formElementName='test2'></form-element>
     <form-element formElementName="test2" ></form-element>
-    <Child/> -->
-
+    -->
+    <!-- <Child/>  -->
     <button>test</button>
   </body>
 
   <script>
-    import { tap } from  'rxjs'
     import { formService } from 'astro-form-elements'
+    
 
-    const test = formService.get('test');
+    //const test = formService.get('test');
    
-
+/* 
     test.valueChanges().subscribe((x:any) => {
       console.log(x)
       console.dir(test)
-    })
-    /* const test = new FormElement('test');
-     */
-    /* test.valueChanges().pipe(
-      tap((x: any) => {
-       //console.log(x)
-      })
-    ).subscribe((x: any) => {
-      console.log(x)
-      
-    })
-
-    const test2 = new FormElement('test2');
-    test2.valueChanges().subscribe((x: any) => {
-      console.log(x)
-    })
-    
-    const test3 = new FormElement('test3');
-     */
-  
-    // test.onChanges().then()
-    
-    //document.querySelector('button')?.addEventListener('click', () => console.log(x));
+    }) */
   </script>
 </html>

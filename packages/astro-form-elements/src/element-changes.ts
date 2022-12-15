@@ -3,7 +3,7 @@ import { ReplaySubject } from "rxjs";
 export type ElementChangesEventType = "focus" | "blur" | "input";
 
 export interface ElementChangesValue {
-  type: ElementChangesEventType;
+  type: string;
   element: {
     name: string;
   };
