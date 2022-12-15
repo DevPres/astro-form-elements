@@ -1,9 +1,7 @@
 import FormElement, { ElementType } from "./form-element";
 
 class FormService {
-  constructor() {
-    console.log("hello service");
-  }
+  constructor() {}
 
   #elementRegistry = new Map<string, FormElement>();
 
