@@ -16,6 +16,6 @@ const dataset = createDatasetFromAstroProps<Props>(Astro.props)
 ---
   <form-element formElementName={formElementName}>
     { !!label ? <label for={formElementName}>{label}</label> : ''}
-    <input  name={formElementName} type={type} placeholder={placeholder}  />
+    <input data-elementInput  name={formElementName} type={type} placeholder={placeholder}  />
   </form-element>
 
