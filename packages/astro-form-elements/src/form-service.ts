@@ -6,7 +6,6 @@ class FormService {
   }
 
   #elementRegistry = new Map<string, FormElement>();
-  #elementTypeRegistry: Set<ElementType> = new Set(["text"]);
 
   registerElement(element: FormElement, key: string) {
     let exist = this.#elementRegistry.has(key);
@@ -27,13 +26,6 @@ class FormService {
       return element;
     }
     return;
-  }
-
-  getAsElementType(type: any): ElementType | Error {
-    if (this.#elementTypeRegistry.has(type)) {
-      return type as ElementType;
-    }
-    throw Error(`The type ${type} is not present in the registry.`);
   }
 }
 

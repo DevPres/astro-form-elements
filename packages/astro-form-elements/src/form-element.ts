@@ -31,18 +31,6 @@ export default class FormElement extends HTMLElement {
 
     this.name = nameDirective;
 
-    let typeDirective = this.getAttribute(this._formElementTypeDirective);
-    if (!typeDirective) {
-      typeDirective = "text";
-    }
-    let type;
-    try {
-      type = formService.getAsElementType(typeDirective);
-    } catch (error) {
-      throw new Error(error);
-    }
-    this.type = type;
-
     try {
       formService.registerElement(this, this.name);
     } catch (error) {
@@ -53,14 +41,11 @@ export default class FormElement extends HTMLElement {
         `
       );
     }
-    this.attachShadow({ mode: "open" });
   }
   /**
    * Attribute to register a FormElement
    */
   private _formElementDirective = "formElementName";
-  private _formElementTypeDirective = "type";
-  private _element: any;
   private _lastValueInsert: string;
   private _lastEvent: ElementChangesEventType;
   private _data: any;
@@ -72,42 +57,12 @@ export default class FormElement extends HTMLElement {
   /**
    * callback called bt broswer when the element enter in page
    */
-  async connectedCallback(): Promise<void> {
-    //TODO WIP: lavorare sulla possibilita di caricare input da fuori
-    const isCustom = false;
-    let html;
-    if (isCustom) {
-      //...TBD
-    } else {
-      /* html = await this.getModelByType(this.type); */
-      fetch(`./model/text.html`).then((x) => {
-        console.log(x);
-      });
-      html = "";
-      console.log(html);
-      html = this.replaceAttrs(html);
-      console.log(html);
-    }
-
-    let shadowRoot = this.shadowRoot!;
-    shadowRoot.innerHTML = html;
-    this._element = shadowRoot.querySelector(`[name=${this.name}]`);
-
-    if (!this._element) {
-      if (isCustom) {
-        //TODO se si sta usando un html custom, colui che emette l'evento deve esser syncato TBD
-        throw Error("TBD");
-      }
-      throw Error(
-        `An input with name ${this.name} was not found in shadowRoot of FormElement`
-      );
-    }
-
-    this._element.addEventListener("input", this._onChange.bind(this));
-    this._element.addEventListener("focus", this._onFocus.bind(this));
-    this._element.addEventListener("blur", this._onBlur.bind(this));
-
-    console.log("connectedCallback", formService);
+  connectedCallback(): void {
+    this.querySelectorAll("input").forEach((input) => {
+      input.addEventListener("input", this._onChange.bind(this));
+      input.addEventListener("focus", this._onFocus.bind(this));
+      input.addEventListener("blur", this._onBlur.bind(this));
+    });
   }
 
   attributeChangedCallback(): void {}
@@ -156,19 +111,19 @@ export default class FormElement extends HTMLElement {
     }
   }
 
-  private getModelByType(type: ElementType): Promise<string> {
+  /*  private getModelByType(type: ElementType): Promise<string> {
     console.log(type);
     fetch(`./model/text.html`).then((x) => {
       console.log(x.body);
       return x;
     });
     return "";
-  }
+  } */
 
-  private replaceAttrs(html: string): string {
+  /* private replaceAttrs(html: string): string {
     console.log(html);
     return html.replace(/{-name-}/g, this.name);
-  }
+  } */
 }
 
 customElements.define("form-element", FormElement);
@@ -278,3 +233,5 @@ constructor(formElementName: string) {
   valueChanges(): Observable<ElementChangesValue> {
     return this._elementChanges$.asObservable();
   }*/
+
+/*  */
