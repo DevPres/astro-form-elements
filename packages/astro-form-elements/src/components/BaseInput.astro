@@ -1,8 +1,7 @@
 ---
 //https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
 import type { HTMLAttributes } from "astro/types";
-import { createDatasetFromAstroProps, generateRandomUUID } from './utils'
-import  FormService from './form-service'
+import { createDatasetFromAstroProps, generateRandomUUID } from './../utils';
 
 export interface Props extends HTMLAttributes<"input"> {
   label?: string;
