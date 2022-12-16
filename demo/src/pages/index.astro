@@ -1,6 +1,6 @@
 ---
-import { BaseInput, BaseCheckbox } from "astro-form-elements";
-import  Child from "../components/Child.astro"
+import { BaseInput, BaseCheckbox } from "astro-form-elements/components";
+
  
 ---
 
@@ -25,15 +25,15 @@ import  Child from "../components/Child.astro"
   </body>
 
   <script>
-    import { formService } from 'astro-form-elements'
+    import { FormElements } from "astro-form-elements";
     
 
-    //const test = formService.get('test');
+    const test = FormElements.get('test');
    
-/* 
+
     test.valueChanges().subscribe((x:any) => {
       console.log(x)
       console.dir(test)
-    }) */
+    })
   </script>
 </html>
