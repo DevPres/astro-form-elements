@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start demo": "npm run start ./demo"
+  },
   "private": true,
   "workspaces": [
     "demo",

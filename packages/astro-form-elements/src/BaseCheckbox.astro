@@ -3,7 +3,7 @@
 import type { HTMLAttributes } from "astro/types";
 import { createDatasetFromAstroProps, generateRandomUUID } from './utils'
 
-interface Props extends HTMLAttributes<"input"> {
+declare interface Props extends HTMLAttributes<"input"> {
   label?: string;
   formElementName: string;
 }
@@ -11,31 +11,28 @@ interface Props extends HTMLAttributes<"input"> {
 const { formElementName,label, name, value, type = "text", placeholder = " " , ...rest } = Astro.props;
 //const dataset = createDatasetFromAstroProps<Props>(Astro.props);
 
-const events = {
+/* const events = {
   emitOn: {
     focus: true,
     blur: true,
     change: true,
   },
-  custom: () => { console.log(this)} 
-}
+  customEvents:{
+    custom: (e,y) => { console.log(e,"y",y, this)} 
+  }
+} */
+
 
 ---
-  <form-element formElementName={formElementName} events={events}>
+  <form-element formElementName={formElementName}  id="astroformelements-checkbox">
     { !!label ? <label for={formElementName}>{label}</label> : ''}
     <input data-elementInput id="test"  name={formElementName} type="checkbox"   />
   </form-element>
 
   <script>
-    //console.log('script base checkbox')
-    const checkbox = document.getElementById("test") as HTMLInputElement;
-    checkbox?.addEventListener('focus', (e) => {
-      //console.log('focus event')
-    })
-    checkbox?.addEventListener('blur', (e) => {
-      //console.log('blur event', e)
-    })
-    checkbox?.focus()
+    console.log("script checkbox")
+    /* const checkbox = document.getElementById('#astroformelements-checkbox');
+    console.log(checkbox); */
     
 
   </script>

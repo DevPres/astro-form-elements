@@ -30,12 +30,7 @@ export default class FormElement extends HTMLElement {
         `
       );
     }
-    const events = this.getAttribute("events");
-    console.log(events);
 
-    this._events = !!events
-      ? events
-      : { emitOn: { focus: true, blur: true, change: true } };
     this.name = nameDirective;
 
     try {
@@ -66,7 +61,7 @@ export default class FormElement extends HTMLElement {
   connectedCallback(): void {
     //TODO connetti tutti gli attributi
     let input = this.querySelector("[data-elementInput]");
-    console.log(this._events);
+
     /* this._events.foreach((x) => {
       console.log(x);
     }); */

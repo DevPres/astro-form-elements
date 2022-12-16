@@ -2,8 +2,9 @@
 //https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
 import type { HTMLAttributes } from "astro/types";
 import { createDatasetFromAstroProps, generateRandomUUID } from './utils'
+import  FormService from './form-service'
 
-interface Props extends HTMLAttributes<"input"> {
+export interface Props extends HTMLAttributes<"input"> {
   label?: string;
   formElementName: string;
 }
@@ -12,10 +13,14 @@ const { formElementName,label, name, type = "text", placeholder = " " , ...rest 
 const dataset = createDatasetFromAstroProps<Props>(Astro.props)
 
 
-
 ---
   <form-element formElementName={formElementName}>
     { !!label ? <label for={formElementName}>{label}</label> : ''}
-    <input data-elementInput  name={formElementName} type={type} placeholder={placeholder}  />
+    <input data-elementInput   name={formElementName} type={type} placeholder={placeholder}  />
   </form-element>
+
+  <script>
+    
+    
+  </script>
 
