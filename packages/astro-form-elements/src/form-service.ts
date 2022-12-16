@@ -1,4 +1,4 @@
-import FormElement, { ElementType } from "./form-element";
+import FormElement from "./form-element";
 
 class FormService {
   constructor() {}
