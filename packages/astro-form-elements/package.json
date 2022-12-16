@@ -3,17 +3,10 @@
   "version": "0.0.8",
   "description": "Element for composing form in Astro!",
   "type": "module",
-  "main": "./src/index.js",
-  "types": "./src/index.d.ts",
-  "exports": "./src/index.js",
-  "files": [
-    "./src/index.js",
-    "./src/BaseInput.astro",
-    "./src/BaseCheckbox.astro",
-    "./src/utils.ts",
-    "./src/form-element.ts",
-    "./src/form-service.ts"
-  ],
+  "exports": {
+    ".": "./src/index.mjs",
+    "./components": "./src/components/index.mjs"
+  },
   "keywords": [],
   "dependencies": {
     "rxjs": "^7.6.0",
