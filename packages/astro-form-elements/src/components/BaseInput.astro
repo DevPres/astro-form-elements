@@ -1,21 +1,24 @@
 ---
 //https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
-import type { HTMLAttributes } from "astro/types";
-import { createDatasetFromAstroProps, generateRandomUUID } from './../utils';
 
-export interface Props extends HTMLAttributes<"input"> {
-  label?: string;
-  formElementName: string;
-}
+import type { ElementProps } from '../index.d'
 
-const { formElementName,label, name, type = "text", placeholder = " " , ...rest } = Astro.props;
-const dataset = createDatasetFromAstroProps<Props>(Astro.props)
+
+export declare interface Props extends ElementProps {}
+
+const { 
+  emitOnFocus = true, 
+  emitOnInput = false, 
+  emitOnUpdate = true, 
+  emitOnChange = true, 
+  ...attrs 
+} = Astro.props;
 
 
 ---
-  <form-element formElementName={formElementName}>
-    { !!label ? <label for={formElementName}>{label}</label> : ''}
-    <input data-elementInput   name={formElementName} type={type} placeholder={placeholder}  />
+  <form-element formElementName={attrs.formElementName}>
+    { !!attrs.label ? <label for={attrs.formElementName}>{attrs.label}</label> : ''}
+    <input data-elementInput   name={attrs.formElementName} type={attrs.type} placeholder={attrs.placeholder}  />
   </form-element>
 
   <script>

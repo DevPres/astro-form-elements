@@ -1,11 +1,7 @@
 {
-  "scripts": {
-    "start demo": "npm run start ./demo"
-  },
   "private": true,
   "workspaces": [
     "demo",
     "packages/*"
-  ],
-  "version": "0.0.1"
+  ]
 }

@@ -1,9 +1,5 @@
 import { Observable, ReplaySubject } from "rxjs";
-import {
-  ElementChangesEvent,
-  ElementChangesEventType,
-  ElementChangesValue,
-} from "./element-changes";
+import { ElementChangesValue } from "./index.d";
 import formService from "./form-service";
 
 export interface ElementOptions {
@@ -42,6 +38,7 @@ export default class FormElement extends HTMLElement {
         `
       );
     }
+    console.log(`${this.name} registered`);
   }
   /**
    * Attribute to register a FormElement
@@ -51,6 +48,10 @@ export default class FormElement extends HTMLElement {
   private _touched = false;
   private _elementChanges$ = new ReplaySubject<ElementChangesValue>();
   private _events: any;
+  private _emitOnFocus: boolean;
+  private _emitOnInput: boolean;
+  private _emitOnUpdate: boolean;
+  private _emitOnChange: boolean;
   public lastValueInsert: any;
   public type: string;
   public value: any;
@@ -61,6 +62,8 @@ export default class FormElement extends HTMLElement {
   connectedCallback(): void {
     //TODO connetti tutti gli attributi
     let input = this.querySelector("[data-elementInput]");
+    console.log(this.dataset);
+    /*  this._emitOnFocus = this.hasAttribute('emitOnFocus') ? this.getAttribute('emitOnFocus') : true */
 
     /* this._events.foreach((x) => {
       console.log(x);
@@ -73,6 +76,12 @@ export default class FormElement extends HTMLElement {
   valueChanges(): Observable<ElementChangesValue> {
     return this._elementChanges$.asObservable();
   }
+
+  /* registerEvent(e: Event | CustomEvent): void {
+    let input = this.querySelector("[data-elementInput]");
+    input?.addEventListener(e.type, e.c);
+    console.log(e);
+  } */
 
   private _elementChanges() {
     this._elementChanges$.next({
@@ -100,8 +109,8 @@ export default class FormElement extends HTMLElement {
 
     if (!this._touched) {
       this._touched = true;
-      this._elementChanges();
     }
+    this._elementChanges();
   }
 
   private _onBlur(event: FocusEvent): void {
@@ -109,8 +118,8 @@ export default class FormElement extends HTMLElement {
 
     if (!this._touched) {
       this._touched = true;
-      this._elementChanges();
     }
+    this._elementChanges();
   }
 }
 

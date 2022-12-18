@@ -1,40 +1,28 @@
 ---
 //https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
-import type { HTMLAttributes } from "astro/types";
-import { createDatasetFromAstroProps, generateRandomUUID } from './../utils'
+import type { ElementProps } from '../index.d'
+export declare interface Props extends ElementProps {}
 
-declare interface Props extends HTMLAttributes<"input"> {
-  label?: string;
-  formElementName: string;
-}
+const { 
+  emitOnFocus = true, 
+  emitOnInput = false, 
+  emitOnUpdate = true, 
+  emitOnChange = true, 
+  ...attrs 
+} = Astro.props;
 
-const { formElementName,label, name, value, type = "text", placeholder = " " , ...rest } = Astro.props;
-//const dataset = createDatasetFromAstroProps<Props>(Astro.props);
-
-/* const events = {
-  emitOn: {
-    focus: true,
-    blur: true,
-    change: true,
-  },
-  customEvents:{
-    custom: (e,y) => { console.log(e,"y",y, this)} 
-  }
-} */
 
 
 ---
-  <form-element formElementName={formElementName}  id="astroformelements-checkbox">
-    { !!label ? <label for={formElementName}>{label}</label> : ''}
-    <input data-elementInput id="test"  name={formElementName} type="checkbox"   />
+  <form-element 
+    formElementName={attrs.formElementName}
+  >
+    { !!attrs.label ? <label for={attrs.formElementName}>{attrs.label}</label> : ''}
+    <input data-elementInput id="test"  name={attrs.formElementName} type="checkbox"   />
   </form-element>
 
   <script>
-    console.log("script checkbox")
-    /* const checkbox = document.getElementById('#astroformelements-checkbox');
-    console.log(checkbox); */
-    
-
+    const checkbox = document.getElementById('astroformelements-checkbox');
   </script>
 
 

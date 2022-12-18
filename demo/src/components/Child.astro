@@ -1,4 +1,11 @@
 ---
+import type { HTMLAttributes } from "astro/types";
+export declare interface Props extends  HTMLAttributes<"input"> {
+  label?: string;
+  formElementName: string;
+}
+
+const { e, ...attrs } = Astro.props;
 ---
 
 
