@@ -35,16 +35,17 @@ export default class BaseFormElement extends HTMLElement {
 
     this._emitOnFocus = this.hasAttribute("emitOnFocus")
       ? Boolean(this.getAttribute("emitOnFocus"))
-      : true;
+      : false;
     this._emitOnBlur = this.hasAttribute("emitOnBlur")
       ? Boolean(this.getAttribute("emitOnBlur"))
-      : true;
+      : false;
     this._emitOnInput = this.hasAttribute("emitOnInput")
       ? Boolean(this.getAttribute("emitOnInput"))
-      : true;
+      : false;
     this._emitOnChange = this.hasAttribute("emitOnChange")
       ? Boolean(this.getAttribute("emitOnChange"))
-      : true;
+      : false;
+    console.dir(this);
   }
   /**
    * Attribute to register a FormElement
@@ -77,12 +78,18 @@ export default class BaseFormElement extends HTMLElement {
     //TODO connetti tutti gli attributi
     let input = this.querySelector("[data-elementInput]");
 
-    /* this._events.foreach((x) => {
-      console.log(x);
-    }); */
-    input?.addEventListener("input", this._onChange.bind(this));
-    input?.addEventListener("focus", this._onFocus.bind(this));
-    input?.addEventListener("blur", this._onBlur.bind(this));
+    if (!!input && this._emitOnInput) {
+      input.addEventListener("input", this._onChange.bind(this));
+    }
+    if (!!input && this._emitOnChange) {
+      input.addEventListener("change", this._onChange.bind(this));
+    }
+    if (!!input && this._emitOnFocus) {
+      input.addEventListener("blur", this._onBlur.bind(this));
+    }
+    if (!!input && this._emitOnBlur) {
+      input.addEventListener("focus", this._onFocus.bind(this));
+    }
   }
 
   valueChanges(): Observable<ElementChangesValue> {

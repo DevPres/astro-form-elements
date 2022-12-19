@@ -1,7 +1,7 @@
 ---
 //https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
 import FormElement from './FormElement.astro';
-import type { ElementProps } from '../types.d'
+import type { ElementEmitterEvents, ElementProps } from '../types.d'
 
 
 
@@ -12,13 +12,19 @@ const {
   events,
   ...attrs 
 } = Astro.props;
+
 if(!!attrs.type && attrs.type ==='checkbox' ) {
   throw Error(`Don\'t use <BaseInput /> for checkbox. Use <BaseCheckbox /> or your custom instead!\r\n`)
 }
+if(!!attrs.type && attrs.type ==='radio' ) {
+  throw Error(`Don\'t use <BaseInput /> for radio. Use <BaseRadio /> or your custom instead!\r\n`)
+}
+
+let emitOn: ElementEmitterEvents[]  = !!events?.length ? events : ['focus', 'blur', 'input'] 
 
 
 ---
-<FormElement formElementName={attrs.formElementName} events={events}>
+<FormElement formElementName={attrs.formElementName} events={emitOn}>
   { !!attrs.label ? <label for={attrs.formElementName}>{attrs.label}</label> : ''}
   <input data-elementInput   name={attrs.formElementName} type={attrs.type} placeholder={attrs.placeholder}  />
 </FormElement>

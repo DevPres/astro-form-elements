@@ -1,21 +1,20 @@
 ---
 //https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
-import type { ElementProps } from '../types.d'
+import type { ElementEmitterEvents, ElementProps } from '../types.d'
 import FormElement from './FormElement.astro';
 export declare interface Props extends ElementProps {}
 
-const { 
-  emitOnFocus = true, 
-  emitOnInput = false, 
-  emitOnUpdate = true, 
-  emitOnChange = true, 
+const {
+  events, 
   ...attrs 
 } = Astro.props;
+
+let emitOn: ElementEmitterEvents[]  = !!events?.length ? events : ['focus', 'blur', 'change']
 
 
 
 ---
-  <FormElement formElementName={attrs.formElementName}>
+  <FormElement formElementName={attrs.formElementName} events={emitOn}>
     { !!attrs.label ? <label for={attrs.formElementName}>{attrs.label}</label> : ''}
     <input data-elementInput id="test"  name={attrs.formElementName} type="checkbox"   />
   </FormElement>
