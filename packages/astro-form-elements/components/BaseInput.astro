@@ -4,26 +4,28 @@ import FormElement from './FormElement.astro';
 import type { ElementProps } from '../types.d'
 
 
+
 export declare interface Props extends ElementProps {}
 
+
 const { 
-  emitOnFocus = true, 
-  emitOnInput = false, 
-  emitOnUpdate = true, 
-  emitOnChange = true, 
+  events,
   ...attrs 
 } = Astro.props;
+if(!!attrs.type && attrs.type ==='checkbox' ) {
+  throw Error(`Don\'t use <BaseInput /> for checkbox. Use <BaseCheckbox /> or your custom instead!\r\n`)
+}
 
 
 ---
-<FormElement formElementName={attrs.formElementName}>
+<FormElement formElementName={attrs.formElementName} events={events}>
   { !!attrs.label ? <label for={attrs.formElementName}>{attrs.label}</label> : ''}
   <input data-elementInput   name={attrs.formElementName} type={attrs.type} placeholder={attrs.placeholder}  />
 </FormElement>
 
 <script>
   
-  console.log('Base Input log')
+  
   
   
 </script>
