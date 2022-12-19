@@ -1,4 +1,4 @@
-import type FormElement from "./form-element";
+import type FormElement from "./components/form-element";
 
 class FormElementsService {
   constructor() {}
@@ -14,10 +14,11 @@ class FormElementsService {
     this.#elementRegistry.set(key, element);
   }
 
-  /*  *
-   * Get the Element, if this is registered, or throw an Error instad
+  /**
+   * Get the Element, if this is registered,
    *
-   * @param key is the formElementName or formElement id of the FormElement to search */
+   * @param formElementName
+   */
 
   get(key: string): FormElement | undefined {
     let element = this.#elementRegistry.get(key);

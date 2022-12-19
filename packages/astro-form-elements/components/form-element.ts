@@ -1,6 +1,6 @@
 import { Observable, ReplaySubject } from "rxjs";
-import type { ElementChangesValue } from "./types";
-import FormElements from "./form-elements-service";
+import type { ElementChangesValue } from "../types";
+import FormElements from "../form-elements-service";
 
 export interface ElementOptions {
   elementName: string;
@@ -16,9 +16,7 @@ export type ElementType = "text";
 export default class FormElement extends HTMLElement {
   constructor() {
     super();
-    //TODO Gestire errore:
-    //TODO 1- stampare html del next e previous sibilings.
-    //TODO 2- parsare indentazione dell'html
+    console.log("custom el");
     const nameDirective = this.getAttribute(this._formElementDirective);
     if (!nameDirective) {
       throw Error(
@@ -28,6 +26,7 @@ export default class FormElement extends HTMLElement {
     }
 
     this.name = nameDirective;
+
     try {
       FormElements.registerElement(this, this.name);
     } catch (error) {
@@ -37,7 +36,6 @@ export default class FormElement extends HTMLElement {
         `
       );
     }
-    console.log(`${this.name} registered`);
   }
   /**
    * Attribute to register a FormElement
@@ -58,6 +56,7 @@ export default class FormElement extends HTMLElement {
    * callback called bt broswer when the element enter in page
    */
   connectedCallback(): void {
+    console.log(`${this.name} registered`);
     //TODO connetti tutti gli attributi
     let input = this.querySelector("[data-elementInput]");
     console.log(this.dataset);
@@ -66,7 +65,7 @@ export default class FormElement extends HTMLElement {
     /* this._events.foreach((x) => {
       console.log(x);
     }); */
-    input?.addEventListener(this._events, this._onChange.bind(this));
+    input?.addEventListener("input", this._onChange.bind(this));
     input?.addEventListener("focus", this._onFocus.bind(this));
     input?.addEventListener("blur", this._onBlur.bind(this));
   }
@@ -83,7 +82,7 @@ export default class FormElement extends HTMLElement {
 
   private _elementChanges() {
     this._elementChanges$.next({
-      type: this._lastEvent,
+      eventType: this._lastEvent,
       element: {
         name: this.name,
       },

@@ -1,0 +1,14 @@
+---
+export declare interface Props {
+  formElementName:string
+}
+const { formElementName } = Astro.props
+---
+<form-element 
+    formElementName={formElementName}
+  >
+  <slot/>
+
+</form-element>
+
+<script src="./form-element.ts"></script>
