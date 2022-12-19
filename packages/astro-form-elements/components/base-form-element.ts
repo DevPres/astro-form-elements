@@ -11,12 +11,9 @@ export interface CustomFormElement {
   value: any;
 }
 
-export type ElementType = "text";
-
 export default class BaseFormElement extends HTMLElement {
   constructor() {
     super();
-    console.log("custom el");
     const nameDirective = this.getAttribute(this._formElementDirective);
     if (!nameDirective) {
       throw Error(
@@ -35,19 +32,40 @@ export default class BaseFormElement extends HTMLElement {
         `
       );
     }
+
+    this._emitOnFocus = this.hasAttribute("emitOnFocus")
+      ? Boolean(this.getAttribute("emitOnFocus"))
+      : true;
+    this._emitOnBlur = this.hasAttribute("emitOnBlur")
+      ? Boolean(this.getAttribute("emitOnBlur"))
+      : true;
+    this._emitOnInput = this.hasAttribute("emitOnInput")
+      ? Boolean(this.getAttribute("emitOnInput"))
+      : true;
+    this._emitOnChange = this.hasAttribute("emitOnChange")
+      ? Boolean(this.getAttribute("emitOnChange"))
+      : true;
   }
   /**
    * Attribute to register a FormElement
    */
   private readonly _formElementDirective = "formElementName";
+  /**
+   * WIP
+   */
   private _lastEvent = "";
+  /**
+   * Change whe the user interact with the UI
+   */
   private _touched = false;
+  /**
+   * WIP
+   */
   private _elementChanges$ = new ReplaySubject<ElementChangesValue>();
-  private _events: any;
-  private _emitOnFocus = true;
-  private _emitOnInput = true;
-  private _emitOnUpdate = false;
-  private _emitOnChange = false;
+  private _emitOnFocus: boolean;
+  private _emitOnInput: boolean;
+  private _emitOnBlur: boolean;
+  private _emitOnChange: boolean;
   public lastValueInsert: any;
   public value: any;
   public name: string;
@@ -58,8 +76,6 @@ export default class BaseFormElement extends HTMLElement {
     console.log(`${this.name} registered`);
     //TODO connetti tutti gli attributi
     let input = this.querySelector("[data-elementInput]");
-    console.log(this.dataset);
-    /*  this._emitOnFocus = this.hasAttribute('emitOnFocus') ? this.getAttribute('emitOnFocus') : true */
 
     /* this._events.foreach((x) => {
       console.log(x);
