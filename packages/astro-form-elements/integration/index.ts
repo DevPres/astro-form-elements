@@ -11,7 +11,7 @@ export default function (): AstroIntegration {
       }) => {
         injectScript(
           "page",
-          'import { FormElement } from "astro-form-elements";'
+          "import FormElement from 'astro-form-elements/form-element.ts';"
         );
       },
     },
