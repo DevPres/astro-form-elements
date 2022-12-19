@@ -1,14 +1,15 @@
-import type { HTMLAttributes } from "astro/types";
+type InputHTMLAttributes = import("astro/types").HTMLAttributes<"input">;
 
 declare module "astro-form-elements";
 declare module "astro-form-elements/components";
 
-export declare interface ElementProps extends HTMLAttributes<"input"> {
+export declare interface ElementProps extends InputHTMLAttributes {
   label?: string;
   formElementName: string;
-  emitOnInput: boolean;
-  emitOnFocus: boolean;
-  emitOnUpdate: boolean;
+  emitOnInput?: boolean;
+  emitOnFocus?: boolean;
+  emitOnUpdate?: boolean;
+  emitOnChange?: boolean;
 }
 
 export declare interface ElementChangesValue {

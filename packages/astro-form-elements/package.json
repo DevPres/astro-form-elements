@@ -1,12 +1,14 @@
 {
   "name": "astro-form-elements",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Element for composing form in Astro!",
   "type": "module",
-  "types": "./src/index.d.ts",
+  "types": "./types.d.ts",
+  "main": "./index",
   "exports": {
-    ".": "./src/index.ts",
-    "./components": "./src/components/index.ts"
+    ".": "./index",
+    "./components": "./components/index.ts",
+    "./form-elements-service": "./form-elements-service.ts"
   },
   "keywords": [],
   "dependencies": {

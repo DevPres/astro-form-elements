@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "noEmit": true
+  },
+  "extends": "astro/tsconfigs/strictest"
+}

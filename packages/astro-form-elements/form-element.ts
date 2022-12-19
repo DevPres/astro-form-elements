@@ -1,6 +1,6 @@
 import { Observable, ReplaySubject } from "rxjs";
-import { ElementChangesValue } from "./index.d";
-import formService from "./form-service";
+import type { ElementChangesValue } from "./types";
+import FormElements from "./form-elements-service";
 
 export interface ElementOptions {
   elementName: string;
@@ -28,9 +28,8 @@ export default class FormElement extends HTMLElement {
     }
 
     this.name = nameDirective;
-
     try {
-      formService.registerElement(this, this.name);
+      FormElements.registerElement(this, this.name);
     } catch (error) {
       throw Error(
         `Element with name ${this.name} already exist
@@ -44,16 +43,15 @@ export default class FormElement extends HTMLElement {
    * Attribute to register a FormElement
    */
   private readonly _formElementDirective = "formElementName";
-  private _lastEvent: string;
+  private _lastEvent = "";
   private _touched = false;
   private _elementChanges$ = new ReplaySubject<ElementChangesValue>();
   private _events: any;
-  private _emitOnFocus: boolean;
-  private _emitOnInput: boolean;
-  private _emitOnUpdate: boolean;
-  private _emitOnChange: boolean;
+  private _emitOnFocus = true;
+  private _emitOnInput = true;
+  private _emitOnUpdate = false;
+  private _emitOnChange = false;
   public lastValueInsert: any;
-  public type: string;
   public value: any;
   public name: string;
   /**
@@ -104,7 +102,7 @@ export default class FormElement extends HTMLElement {
     this._elementChanges();
   }
 
-  private _onFocus(event: FocusEvent): void {
+  private _onFocus(event: Event): void {
     this._lastEvent = event.type;
 
     if (!this._touched) {
@@ -113,7 +111,7 @@ export default class FormElement extends HTMLElement {
     this._elementChanges();
   }
 
-  private _onBlur(event: FocusEvent): void {
+  private _onBlur(event: Event): void {
     this._lastEvent = event.type;
 
     if (!this._touched) {

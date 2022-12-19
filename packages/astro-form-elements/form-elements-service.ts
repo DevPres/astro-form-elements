@@ -1,11 +1,12 @@
-import FormElement from "./form-element";
+import type FormElement from "./form-element";
 
-class FormService {
+class FormElementsService {
   constructor() {}
 
   #elementRegistry = new Map<string, FormElement>();
 
   registerElement(element: FormElement, key: string) {
+    console.log();
     let exist = this.#elementRegistry.has(key);
     if (exist) {
       throw new Error("Element already present in the registry");
@@ -13,11 +14,11 @@ class FormService {
     this.#elementRegistry.set(key, element);
   }
 
-  /**
+  /*  *
    * Get the Element, if this is registered, or throw an Error instad
    *
-   * @param key is the formElementName or formElement id of the FormElement to search
-   */
+   * @param key is the formElementName or formElement id of the FormElement to search */
+
   get(key: string): FormElement | undefined {
     let element = this.#elementRegistry.get(key);
     if (!!element) {
@@ -27,4 +28,6 @@ class FormService {
   }
 }
 
-export default new FormService();
+const FormElements = new FormElementsService();
+/* export default new FormElementsService(); */
+export default FormElements;
