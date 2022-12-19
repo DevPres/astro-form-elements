@@ -13,7 +13,10 @@
   },
   "keywords": [],
   "dependencies": {
-    "rxjs": "^7.6.0",
-    "astro": "^1.6.12"
+    "astro": "^1.6.12",
+    "rxjs": "^7.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.17"
   }
 }
