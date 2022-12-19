@@ -1,6 +1,6 @@
 ---
 //https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
-
+import FormElement from './FormElement.astro';
 import type { ElementProps } from '../types.d'
 
 
@@ -16,13 +16,15 @@ const {
 
 
 ---
-  <form-element formElementName={attrs.formElementName}>
-    { !!attrs.label ? <label for={attrs.formElementName}>{attrs.label}</label> : ''}
-    <input data-elementInput   name={attrs.formElementName} type={attrs.type} placeholder={attrs.placeholder}  />
-  </form-element>
+<FormElement formElementName={attrs.formElementName}>
+  { !!attrs.label ? <label for={attrs.formElementName}>{attrs.label}</label> : ''}
+  <input data-elementInput   name={attrs.formElementName} type={attrs.type} placeholder={attrs.placeholder}  />
+</FormElement>
 
-  <script>
-    
-    
-  </script>
+<script>
+  
+  console.log('Base Input log')
+  
+  
+</script>
 

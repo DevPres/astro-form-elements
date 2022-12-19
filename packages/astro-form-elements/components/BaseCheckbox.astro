@@ -1,6 +1,7 @@
 ---
 //https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
 import type { ElementProps } from '../types.d'
+import FormElement from './FormElement.astro';
 export declare interface Props extends ElementProps {}
 
 const { 
@@ -14,12 +15,10 @@ const {
 
 
 ---
-  <form-element 
-    formElementName={attrs.formElementName}
-  >
+  <FormElement formElementName={attrs.formElementName}>
     { !!attrs.label ? <label for={attrs.formElementName}>{attrs.label}</label> : ''}
     <input data-elementInput id="test"  name={attrs.formElementName} type="checkbox"   />
-  </form-element>
+  </FormElement>
 
   <script>
     //const checkbox = document.getElementById('astroformelements-checkbox');
