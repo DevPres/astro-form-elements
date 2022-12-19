@@ -4,12 +4,9 @@ declare module "astro-form-elements";
 declare module "astro-form-elements/components";
 
 export declare interface ElementProps extends InputHTMLAttributes {
-  label?: string;
   formElementName: string;
-  emitOnInput?: boolean;
-  emitOnFocus?: boolean;
-  emitOnUpdate?: boolean;
-  emitOnChange?: boolean;
+  label?: string;
+  events?: ElementEmitterEvents[];
 }
 
 export declare interface ElementChangesValue {
@@ -22,3 +19,9 @@ export declare interface ElementChangesValue {
     lastValueInsert: any;
   };
 }
+
+export declare type ElementEmitterEvents =
+  | "input"
+  | "change"
+  | "focus"
+  | "blur";
