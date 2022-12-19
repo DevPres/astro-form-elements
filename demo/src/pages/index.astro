@@ -22,23 +22,31 @@ import { BaseInput, BaseCheckbox } from "astro-form-elements/components";
     <form-element formElementName="test2" ></form-element>
     -->
     <!--  <Child/>  --> 
-    <button>test</button>
+    <button id="btn" disabled>test</button>
   </body>
 
   <script>
-    
 
+    
     import FormElements from "astro-form-elements/form-elements-service";
-
+    
+    window.addEventListener('load', () => {
+     
+      const test = FormElements.get('test');
+      const button = document.getElementById('btn') as HTMLButtonElement
+     console.log(test)
+  
+      test?.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test)
+      })
+    })
+    
     
 
-    const test = FormElements.get('test');
-   console.log(test)
-
-    test?.valueChanges().subscribe((x:any) => {
-      console.log(x)
-      console.dir(test)
-    })
   
 
 
