@@ -5,20 +5,19 @@ import type { ElementEmitterEvents, ElementProps } from '../types.d'
 
 
 
-export declare interface Props extends ElementProps {}
+export declare type BaseInputInterface = Omit<ElementProps, 'events' | 'type' > 
+
+export declare interface Props extends BaseInputInterface {
+  events?: Exclude<ElementProps["events"], 'change'>,  
+  type: Exclude<ElementProps["type"], 'checkbox' | 'radio'>
+}
 
 
 const { 
   events,
+  type,
   ...attrs 
 } = Astro.props;
-
-if(!!attrs.type && attrs.type ==='checkbox' ) {
-  throw Error(`Don\'t use <BaseInput /> for checkbox. Use <BaseCheckbox /> or your custom instead!\r\n`)
-}
-if(!!attrs.type && attrs.type ==='radio' ) {
-  throw Error(`Don\'t use <BaseInput /> for radio. Use <BaseRadio /> or your custom instead!\r\n`)
-}
 
 let emitOn: ElementEmitterEvents[]  = !!events?.length ? events : ['focus', 'blur', 'input'] 
 
@@ -26,7 +25,7 @@ let emitOn: ElementEmitterEvents[]  = !!events?.length ? events : ['focus', 'blu
 ---
 <FormElement formElementName={attrs.formElementName} events={emitOn}>
   { !!attrs.label ? <label for={attrs.formElementName}>{attrs.label}</label> : ''}
-  <input data-elementInput   name={attrs.formElementName} type={attrs.type} placeholder={attrs.placeholder}  />
+  <input data-elementInput   name={attrs.formElementName} type={type} placeholder={attrs.placeholder}  />
 </FormElement>
 
 <script>

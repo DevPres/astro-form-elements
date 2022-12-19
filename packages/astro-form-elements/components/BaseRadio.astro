@@ -7,15 +7,17 @@ export declare type BaseCheckboxInterface = Omit<ElementProps, 'events' | 'type'
 
 export declare interface Props extends BaseCheckboxInterface {
   events?: Exclude<ElementProps["events"], 'input'>,  
-  type?: Extract<ElementProps["type"], 'checkbox'>
+  type?: Extract<ElementProps["type"], 'radio'>
 }
 
 
 const {
   events,
-  type = 'checkbox',/*  */
+  type = 'radio',
   ...attrs 
 } = Astro.props;
+
+
 
 let emitOn: ElementEmitterEvents[]  = !!events?.length ? events : ['focus', 'blur', 'change']
 
