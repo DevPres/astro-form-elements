@@ -6,7 +6,6 @@ class FormElementsService {
   #elementRegistry = new Map<string, FormElement>();
 
   registerElement(element: FormElement, key: string) {
-    console.log();
     let exist = this.#elementRegistry.has(key);
     if (exist) {
       throw new Error("Element already present in the registry");
