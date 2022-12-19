@@ -13,7 +13,7 @@ export declare interface ElementProps extends InputHTMLAttributes {
 }
 
 export declare interface ElementChangesValue {
-  type: string;
+  eventType: string;
   element: {
     name: string;
   };
