@@ -1,15 +1,22 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-export declare interface Props extends  HTMLAttributes<"input"> {
-  label?: string;
-  formElementName: string;
-}
-
-const { e, ...attrs } = Astro.props;
+//import { BaseInput } from "astro-form-elements/components";
 ---
 
+<!-- <BaseInput formElementName="test" label="test"/> -->
 
 <script>
+
+/* import FormElements from "astro-form-elements/form-elements-service";
+
+    
+
+const test = FormElements.get('test');
+console.log(test)
+
+test?.valueChanges().subscribe((x:any) => {
+  console.log(x)
+  console.dir(test)
+}) */
  
   /* import { FormElement } from 'astro-form-elements'
   import { tap } from  'rxjs'
