@@ -1,5 +1,5 @@
 ---
-import { BaseInput, BaseCheckbox } from "astro-form-elements/components"; 
+import { BaseInput, BaseCheckbox, BaseRadio } from "astro-form-elements/components"; 
 
 
  
@@ -16,6 +16,25 @@ import { BaseInput, BaseCheckbox } from "astro-form-elements/components";
   <body>
     <BaseInput formElementName="test" label="test" type='number'/>
     <BaseCheckbox formElementName="test2" label="this is a checkbox"/>
+    <BaseRadio formElementName="test3" label="this is a radio"/>
+    <BaseInput formElementName="test4" label="test" type='number'/>
+    <BaseCheckbox formElementName="test5" label="this is a checkbox"/>
+    <BaseRadio formElementName="test6" label="this is a radio"/>
+    <BaseInput formElementName="test7" label="test" type='number'/>
+    <BaseCheckbox formElementName="test8" label="this is a checkbox"/>
+    <BaseRadio formElementName="test9" label="this is a radio"/>
+    <BaseInput formElementName="test10" label="test" type='number'/>
+    <BaseCheckbox formElementName="test11" label="this is a checkbox"/>
+    <BaseRadio formElementName="test12" label="this is a radio"/>
+    <BaseInput formElementName="test13" label="test" type='number'/>
+    <BaseCheckbox formElementName="test14" label="this is a checkbox"/>
+    <BaseRadio formElementName="test15" label="this is a radio"/>
+    <BaseInput formElementName="test16" label="test" type='number'/>
+    <BaseCheckbox formElementName="test17" label="this is a checkbox"/>
+    <BaseRadio formElementName="test18" label="this is a radio"/>
+    <BaseInput formElementName="test19" label="test" type='number'/>
+    <BaseCheckbox formElementName="test20" label="this is a checkbox"/>
+    <BaseRadio formElementName="test21" label="this is a radio"/>
     <div id="id"></div>
     <!-- <form-element formElementName="test" id='idtest'></form-element> -->
    <!--  <form-element formElementName='test2'></form-element>
@@ -33,15 +52,174 @@ import { BaseInput, BaseCheckbox } from "astro-form-elements/components";
     window.addEventListener('load', () => {
      
       const test = FormElement('test');
+      const test2 = FormElement('test2');
+      const test3 = FormElement('test3');
+      const test4 = FormElement('test4');
+      const test5 = FormElement('test5');
+      const test6 = FormElement('test6');
+      const test7 = FormElement('test7');
+      const test8 = FormElement('test8');
+      const test9 = FormElement('test9');
+      const test10 = FormElement('test10');
+      const test11 = FormElement('test11');
+      const test12 = FormElement('test12');
+      const test13 = FormElement('test13');
+      const test14 = FormElement('test14');
+      const test15 = FormElement('test15');
+      const test16 = FormElement('test16');
+      const test17 = FormElement('test17');
+      const test18 = FormElement('test18');
+      const test19 = FormElement('test19');
+      const test20 = FormElement('test20');
+      const test21 = FormElement('test21');
       const button = document.getElementById('btn') as HTMLButtonElement
-     console.log(test)
+      console.log(test)
+      console.log(test2)
   
-      test?.valueChanges().subscribe((x) => {
+      test.valueChanges().subscribe((x) => {
         console.log(x)
         if(x.eventType === 'input') {
           button.disabled = false 
         }
         console.dir(test)
+      })
+      test2.valueChanges().subscribe((x) => {
+        console.log(x)
+       
+        console.dir(test2)
+      })
+      test3.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test4.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test5.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test6.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test7.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test8.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test9.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test10.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test11.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test12.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test13.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test14.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test15.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test16.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test17.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test18.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test19.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test20.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
+      })
+      test21.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(test3)
       })
     })
     
