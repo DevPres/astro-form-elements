@@ -8,7 +8,8 @@
   "exports": {
     ".": "./index",
     "./components": "./components/index.ts",
-    "./form-elements-service": "./form-elements-service.ts",
+    "./form-elements-registry": "./form-elements-registry.ts",
+    "./form-element": "./form-element.ts",
     "./integration": "./integration/index.ts"
   },
   "keywords": [],

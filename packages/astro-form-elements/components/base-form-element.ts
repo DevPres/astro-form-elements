@@ -1,6 +1,6 @@
 import { Observable, ReplaySubject } from "rxjs";
 import type { ElementChangesValue } from "../types";
-import FormElements from "../form-elements-service";
+import FormElements from "../form-elements-registry";
 
 export interface ElementOptions {
   elementName: string;
@@ -13,7 +13,7 @@ export interface CustomFormElement {
 
 export type ElementType = "text";
 
-export default class FormElement extends HTMLElement {
+export default class BaseFormElement extends HTMLElement {
   constructor() {
     super();
     console.log("custom el");
@@ -32,7 +32,6 @@ export default class FormElement extends HTMLElement {
     } catch (error) {
       throw Error(
         `Element with name ${this.name} already exist
-        at:
         `
       );
     }
@@ -120,4 +119,4 @@ export default class FormElement extends HTMLElement {
   }
 }
 
-customElements.define("form-element", FormElement);
+customElements.define("form-element", BaseFormElement);

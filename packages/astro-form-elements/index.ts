@@ -1,2 +1,2 @@
-export { default as FormElements } from "./form-elements-service";
-export { default as FormElement } from "./components/form-element";
+export { default as FormElementsRegistry } from "./form-elements-registry";
+export { default as FormElement } from "./form-element";

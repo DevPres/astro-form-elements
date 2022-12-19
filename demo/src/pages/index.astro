@@ -28,11 +28,11 @@ import { BaseInput, BaseCheckbox } from "astro-form-elements/components";
   <script>
 
     
-    import FormElements from "astro-form-elements/form-elements-service";
+    import  FormElement  from "astro-form-elements/form-element";
     
     window.addEventListener('load', () => {
      
-      const test = FormElements.get('test');
+      const test = FormElement('test');
       const button = document.getElementById('btn') as HTMLButtonElement
      console.log(test)
   

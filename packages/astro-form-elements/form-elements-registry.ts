@@ -1,4 +1,4 @@
-import type FormElement from "./components/form-element";
+import type FormElement from "./components/base-form-element";
 
 class FormElementsService {
   constructor() {}
@@ -29,6 +29,6 @@ class FormElementsService {
   }
 }
 
-const FormElements = new FormElementsService();
+const FormElementsRegistry = new FormElementsService();
 /* export default new FormElementsService(); */
-export default FormElements;
+export default FormElementsRegistry;
