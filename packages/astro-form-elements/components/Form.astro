@@ -1,0 +1,37 @@
+---
+//https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
+import FormGroupElement from './FormGroupElement.astro';
+import type { FormGroupElementProps } from '../types.d'
+
+
+
+/* export declare type InputInterface = Omit<ElementProps, 'events' | 'type' >  */
+/*
+ events?: Exclude<ElementProps["events"], 'change'>,  
+  type: Exclude<ElementProps["type"], 'checkbox' | 'radio'> 
+
+*/
+
+export declare interface Props extends FormGroupElementProps {}
+
+
+const { 
+  formGroupElementName,
+} = Astro.props;
+
+
+
+
+---
+<FormGroupElement formGroupElementName={formGroupElementName}>
+  <form>
+    <slot/>
+  </form>
+</FormGroupElement>
+
+<script>
+  
+  
+  
+  
+</script>
