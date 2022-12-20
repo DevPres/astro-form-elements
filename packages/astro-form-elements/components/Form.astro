@@ -20,11 +20,12 @@ const {
 } = Astro.props;
 
 
-
+/* console.log('form');
+console.log(formGroupElementName); */
 
 ---
 <FormGroupElement formGroupElementName={formGroupElementName}>
-  <form>
+  <form data-elementForm>
     <slot/>
   </form>
 </FormGroupElement>
