@@ -6,6 +6,7 @@ declare module "astro-form-elements/components";
 
 export declare interface FormElementProps extends InputHTMLAttributes {
   formElementName: string;
+  formGroupName?: string;
   label?: string;
   events?: FormElementEmitterEvents[];
 }
