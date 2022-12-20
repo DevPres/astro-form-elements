@@ -1,8 +1,5 @@
 ---
 import { Form, Input } from "astro-form-elements/components"; 
-
-
- 
 ---
 
 <html lang="en">
@@ -15,7 +12,9 @@ import { Form, Input } from "astro-form-elements/components";
   </head>
   <body>
     <Form formGroupElementName="form">
-      <Input formElementName="text-in-form" label="text-in-form" type='text' inputmode="numeric"  min="3" max="5"/>
+      <div>
+        <Input formGroupName="form" formElementName="text-in-form" label="text-in-form" type='text' inputmode="numeric"  min="3" max="5"/>
+      </div>
     </Form>
     <Input formElementName="test" label="text" type='text' inputmode="numeric"  min="3" max="5"/>
     <Input formElementName="checkbox" type="checkbox" value="true" label="this is a checkbox"/>
