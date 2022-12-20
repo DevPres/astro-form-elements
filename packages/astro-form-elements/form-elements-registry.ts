@@ -1,14 +1,23 @@
 import type FormElement from "./components/base-form-element";
+import type FormGroupElement from "./components/base-form-group-element";
 
 class FormElementsService {
   constructor() {}
 
-  #elementRegistry = new Map<string, FormElement>();
+  #elementRegistry = new Map<string, FormElement | FormGroupElement>();
 
-  registerElement(element: FormElement, key: string) {
+  registerElement(
+    element: FormElement | FormGroupElement,
+    key: string
+  ): void | Error {
     let exist = this.#elementRegistry.has(key);
     if (exist) {
-      throw new Error("Element already present in the registry");
+      let existingElement = this.#elementRegistry.get(key) as
+        | FormElement
+        | FormGroupElement;
+      if (typeof existingElement === typeof element) {
+        throw new Error("Element already present in the registry");
+      }
     }
     this.#elementRegistry.set(key, element);
   }
@@ -19,7 +28,7 @@ class FormElementsService {
    * @param formElementName
    */
 
-  get(key: string): FormElement | undefined {
+  get(key: string): FormElement | FormGroupElement | undefined {
     let element = this.#elementRegistry.get(key);
     if (!!element) {
       return element;
