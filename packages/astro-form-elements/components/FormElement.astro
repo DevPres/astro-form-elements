@@ -4,8 +4,9 @@ import type { ElementEmitterEvents } from '../types';
 export declare interface Props {
   formElementName:string
   events: ElementEmitterEvents[] | undefined
+  role?: string;
 }
-const { formElementName, events } = Astro.props
+const { formElementName, events , ...attrs} = Astro.props
 ---
 <form-element 
   formElementName={formElementName}
@@ -13,6 +14,7 @@ const { formElementName, events } = Astro.props
   emitOnBlur={!!events ? events.includes('blur') : true}
   emitOnInput={!!events ? events.includes('input') : true}
   emitOnChange={!!events ? events.includes('change') : false}
+  {...attrs}
   >
   <slot/>
 </form-element>

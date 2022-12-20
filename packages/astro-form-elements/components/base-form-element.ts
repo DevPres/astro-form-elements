@@ -1,5 +1,5 @@
 import { Observable, ReplaySubject } from "rxjs";
-import type { ElementChangesValue } from "../types";
+import type { FormElementChangesValue } from "../types";
 import FormElements from "../form-elements-registry";
 
 export interface ElementOptions {
@@ -62,7 +62,7 @@ export default class BaseFormElement extends HTMLElement {
   /**
    * WIP
    */
-  private _elementChanges$ = new ReplaySubject<ElementChangesValue>();
+  private _elementChanges$ = new ReplaySubject<FormElementChangesValue>();
   private _emitOnFocus: boolean;
   private _emitOnInput: boolean;
   private _emitOnBlur: boolean;
@@ -92,7 +92,7 @@ export default class BaseFormElement extends HTMLElement {
     }
   }
 
-  valueChanges(): Observable<ElementChangesValue> {
+  valueChanges(): Observable<FormElementChangesValue> {
     return this._elementChanges$.asObservable();
   }
 
