@@ -10,6 +10,7 @@
     "./components": "./components/index.ts",
     "./form-elements-registry": "./form-elements-registry.ts",
     "./form-element": "./form-element.ts",
+    "./form-group-element": "./form-group-element.ts",
     "./integration": "./integration/index.ts"
   },
   "keywords": [],
