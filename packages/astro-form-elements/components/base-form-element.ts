@@ -45,6 +45,7 @@ export default class BaseFormElement extends HTMLElement {
     this._emitOnChange = this.hasAttribute("emitOnChange")
       ? Boolean(this.getAttribute("emitOnChange"))
       : false;
+    console.log(`${this.name} registered`);
     console.dir(this);
   }
   /**
@@ -74,7 +75,6 @@ export default class BaseFormElement extends HTMLElement {
    * callback called bt broswer when the element enter in page
    */
   connectedCallback(): void {
-    console.log(`${this.name} registered`);
     //TODO connetti tutti gli attributi
     let input = this.querySelector("[data-elementInput]");
 
