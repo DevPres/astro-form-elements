@@ -1,18 +1,18 @@
 ---
 //https://docs.astro.build/en/guides/typescript/#built-in-html-attributes
 import FormElement from './FormElement.astro';
-import type { ElementEmitterEvents, ElementProps } from '../types.d'
+import type { FormElementEmitterEvents, FormElementProps } from '../types.d'
 
 
 
-/* export declare type InputInterface = Omit<ElementProps, 'events' | 'type' >  */
+/* export declare type InputInterface = Omit<FormElementProps, 'events' | 'type' >  */
 /*
- events?: Exclude<ElementProps["events"], 'change'>,  
-  type: Exclude<ElementProps["type"], 'checkbox' | 'radio'> 
+ events?: Exclude<FormElementProps["events"], 'change'>,  
+  type: Exclude<FormElementProps["type"], 'checkbox' | 'radio'> 
 
 */
 
-export declare interface Props extends ElementProps {}
+export declare interface Props extends FormElementProps {}
 
 
 const { 
@@ -22,7 +22,7 @@ const {
   ...attrs 
 } = Astro.props;
 
-let emitOn: ElementEmitterEvents[] | undefined = events;
+let emitOn: FormElementEmitterEvents[] | undefined = events;
 if(!emitOn || !emitOn.length) {
   
 }
