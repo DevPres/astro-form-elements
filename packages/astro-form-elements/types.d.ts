@@ -1,12 +1,16 @@
 type InputHTMLAttributes = import("astro/types").HTMLAttributes<"input">;
+type FormHTMLAttributes = import("astro/types").HTMLAttributes<"form">;
 
 declare module "astro-form-elements";
 declare module "astro-form-elements/components";
 
-export declare interface ElementProps extends InputHTMLAttributes {
+export declare interface FormElementProps extends InputHTMLAttributes {
   formElementName: string;
   label?: string;
-  events?: ElementEmitterEvents[];
+  events?: FormElementEmitterEvents[];
+}
+export declare interface FormGroupElementProps extends FormHTMLAttributes {
+  formGroupElementName: string;
 }
 
 export declare interface FormElementChangesValue {
@@ -29,7 +33,7 @@ export declare interface FormGroupElementChangesValue {
   };
 }
 
-export declare type ElementEmitterEvents =
+export declare type FormElementEmitterEvents =
   | "input"
   | "change"
   | "focus"
