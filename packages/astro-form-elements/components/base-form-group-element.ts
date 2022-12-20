@@ -11,13 +11,13 @@ export interface CustomFormElement {
   value: any;
 }
 
-export default class BaseFormElement extends HTMLElement {
+export default class BaseFormGroupElement extends HTMLElement {
   constructor() {
     super();
-    const nameDirective = this.getAttribute(this._formElementDirective);
+    const nameDirective = this.getAttribute(this._formGroupElementDirective);
     if (!nameDirective) {
       throw Error(
-        `formElementName  id is required!
+        `formGroupElementName  id is required!
         `
       );
     }
@@ -32,11 +32,13 @@ export default class BaseFormElement extends HTMLElement {
         `
       );
     }
+    console.log(`${this.name} registered`);
+    console.dir(this);
   }
   /**
    * Attribute to register a FormElement
    */
-  private readonly _formElementDirective = "formElementName";
+  private readonly _formGroupElementDirective = "formGroupElementName";
   /**
    * WIP
    */
@@ -56,7 +58,7 @@ export default class BaseFormElement extends HTMLElement {
    */
   connectedCallback(): void {}
 
-  valueChanges(): Observable<FormElementChangesValue> {
+  valueChanges(): Observable<FormGroupElementChangesValue> {
     return this._elementChanges$.asObservable();
   }
 
@@ -79,4 +81,4 @@ export default class BaseFormElement extends HTMLElement {
   }
 }
 
-customElements.define("form-element", BaseFormElement);
+customElements.define("form-group-element", BaseFormGroupElement);
