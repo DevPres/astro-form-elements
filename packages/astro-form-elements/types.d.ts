@@ -9,7 +9,7 @@ export declare interface ElementProps extends InputHTMLAttributes {
   events?: ElementEmitterEvents[];
 }
 
-export declare interface ElementChangesValue {
+export declare interface FormElementChangesValue {
   eventType: string;
   element: {
     name: string;
@@ -17,6 +17,15 @@ export declare interface ElementChangesValue {
   data: {
     value: any;
     lastValueInsert: any;
+  };
+}
+export declare interface FormGroupElementChangesValue {
+  eventType: string;
+  element: {
+    name: string;
+  };
+  data: {
+    value: any;
   };
 }
 
