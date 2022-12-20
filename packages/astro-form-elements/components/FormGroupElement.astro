@@ -1,0 +1,15 @@
+---
+
+export declare interface Props {
+  formGroupElementName:string
+}
+const { formGroupElementName, ...attrs} = Astro.props
+---
+<form-group-element 
+  formGroupElementName={formGroupElementName}
+  {...attrs}
+  >
+  <slot/>
+</form-group-element>
+
+<script src="./base-form-group-element.ts"></script>

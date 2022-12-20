@@ -1,10 +1,9 @@
 ---
-import type { ElementEmitterEvents } from '../types';
+import type { FormElementEmitterEvents } from '../types';
 
 export declare interface Props {
   formElementName:string
-  events: ElementEmitterEvents[] | undefined
-  role?: string;
+  events: FormElementEmitterEvents[] | undefined
 }
 const { formElementName, events , ...attrs} = Astro.props
 ---
