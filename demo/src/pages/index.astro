@@ -1,5 +1,5 @@
 ---
-import { Input } from "astro-form-elements/components"; 
+import { Form, Input } from "astro-form-elements/components"; 
 
 
  
@@ -14,9 +14,12 @@ import { Input } from "astro-form-elements/components";
     <title>Astro</title>
   </head>
   <body>
-    <Input formElementName="test" label="test" type='number' aria-busy="true" start="3" min="3" max="5"/>
-    <Input formElementName="test2" type="checkbox" value="true" label="this is a checkbox"/>
-    <Input formElementName="test3" type="radio" label="this is a radio" value="value" />
+    <Form formGroupElementName="form">
+      <Input formElementName="text-in-form" label="text-in-form" type='text' inputmode="numeric"  min="3" max="5"/>
+    </Form>
+    <Input formElementName="test" label="text" type='text' inputmode="numeric"  min="3" max="5"/>
+    <Input formElementName="checkbox" type="checkbox" value="true" label="this is a checkbox"/>
+    <Input formElementName="radio" type="radio" label="this is a radio" value="value" />
     
     <div id="id"></div>
     <!-- <form-element formElementName="test" id='idtest'></form-element> -->
@@ -30,43 +33,60 @@ import { Input } from "astro-form-elements/components";
   <script>
 
     
+    import FormGroupElement from "astro-form-elements/form-group-element";
     import  FormElement  from "astro-form-elements/form-element";
     
     window.addEventListener('load', () => {
      
-      const test = FormElement('test');
-      const test2 = FormElement('test2');
-      const test3 = FormElement('test3');
+      const text = FormElement('test');
+      const checkbox = FormElement('checkbox');
+      const radio = FormElement('radio');
+      const text_in_form = FormElement('text-in-form');
+      const form1 = FormGroupElement('form')
 
       
      
       const button = document.getElementById('btn') as HTMLButtonElement
-      /* console.log(test)
-      console.log(test2)
-      console.log(test3)
+      /* console.log(text)
+      console.log(checkbox)
+      console.log(radio)
  */
      
-      console.log(obj)
+      
   
-      test.valueChanges().subscribe((x) => {
+      text.valueChanges().subscribe((x) => {
         console.log(x)
-        console.log(obj)
+        
         if(x.eventType === 'input') {
           button.disabled = false 
         }
-        console.dir(test)
+        console.dir(text)
       })
-      test2.valueChanges().subscribe((x) => {
+      checkbox.valueChanges().subscribe((x) => {
         console.log(x)
        
-        console.dir(test2)
+        console.dir(checkbox)
       })
-      test3.valueChanges().subscribe((x) => {
+      radio.valueChanges().subscribe((x) => {
         console.log(x)
         if(x.eventType === 'input') {
           button.disabled = false 
         }
-        console.dir(test3)
+        console.dir(radio)
+      })
+      text_in_form.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(text_in_form)
+      })
+      form1.valueChanges().subscribe((x) => {
+        console.log(x)
+        if(x.eventType === 'input') {
+          button.disabled = false 
+        }
+        console.dir(text_in_form)
       })
     })
     
