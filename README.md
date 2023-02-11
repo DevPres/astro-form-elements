@@ -1,6 +1,6 @@
 # THIS PACKAGE IS A WIP
 
-I'm working on this package during this days (december 2022), i think i can show something during this month.
+I'm working on this package during this days (december 2022),
 I'm trying to create a little set that provide some control on the forms, on the way the angular-forms do.
 
 I'm building this only with astro and rxjs.
